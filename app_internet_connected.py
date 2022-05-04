@@ -67,7 +67,7 @@ else:
         transcription_time = time.time()-start_transcription_time
         st.write('\n' + transcription)
         st.write('\n\n' + f'Time: {round(transcription_time, 2)} seconds')
-        st.write(f'Number of words: {len(transcription)}')
+        st.write(f'Number of words: {len(transcription.split())}')
 
 
 ################################################################################
