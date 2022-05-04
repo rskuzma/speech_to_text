@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import time
 import librosa
 import torch
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
@@ -61,15 +62,12 @@ else:
     audio_bytes = audio_file.read()
     st.audio(audio_bytes, format='audio/wav')
     with st.spinner('Making transcript...'):
+        start_transcription_time = time.time()
         transcription = transcribe(model, tokenizer, PATH_TO_CLIP, 16000) # hard code sample rate    
+        transcription_time = time.time()-start_transcription_time
         st.write('\n' + transcription)
+        st.write('\n\n' + f'Time: {round(transcription_time, 2)} seconds')
+        st.write(f'Number of words: {len(transcription)}')
 
 
-################################################################################
-
-
-
-
-        
-    
 ################################################################################
